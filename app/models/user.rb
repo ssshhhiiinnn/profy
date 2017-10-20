@@ -13,6 +13,17 @@ class User < ActiveRecord::Base
   #validation
   before_validation :group_key_to_id, if: :has_group_key?
 
+  def name
+    "#{family_name} #{first_name}"
+  end
+
+  def name_kana
+    "#{family_name_kana} #{first_name_kana}"
+  end
+
+
+
+
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     group_key = conditions.delete(:group_key)
